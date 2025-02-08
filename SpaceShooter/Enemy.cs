@@ -8,7 +8,13 @@ public class Enemy : ScreenSurface, IMoveable
     private int _ticks, _speed;
     public Enemy(int speed) : base(1, 1)
     {
-        Surface[0, 0].Glyph = 'V';
+        Surface[0, 0].Glyph = speed switch
+        {
+            1 => '|',
+            2 or 3 => '*',
+            4 or 5 => 'V',
+            _ => 'X'
+        };
         _speed = speed;
         Surface[0, 0].Foreground = speed switch
         {
