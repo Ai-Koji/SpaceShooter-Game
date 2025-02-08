@@ -37,6 +37,14 @@ public class GameScreen : ScreenObject
         
         public override bool ProcessKeyboard(Keyboard info)
         {
+            // перезапуск
+
+            if (_isGameOver && info.KeysPressed.Count > 0)
+                {
+                    RestartGame();
+                    return true;
+                }
+
             if (info.IsKeyPressed(Keys.Left) && _player.Position.X > 0)
                 _player.Position += new Point(-1, 0);
             else if (info.IsKeyPressed(Keys.Right) && _player.Position.X < 39)
@@ -78,7 +86,19 @@ public class GameScreen : ScreenObject
             CheckPlayerEnemyCollisions();
             CheckBulletEnemyCollisions();
         }
-        
+        private void RestartGame()
+        {
+            _isGameOver = false;
+            _health = 3;
+            _score = 0;
+            _bullets.Clear();
+            _enemies.Clear();
+            //_supplies.Clear();
+            _console.Children.Clear();
+            _player.Position = new Point(20, 22);
+            _console.Children.Add(_player);
+        }
+
         private void CheckPlayerEnemyCollisions()
         {
             foreach (var enemy in _enemies.ToArray())
