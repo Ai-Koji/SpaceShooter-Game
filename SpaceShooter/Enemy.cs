@@ -10,6 +10,13 @@ public class Enemy : ScreenSurface, IMoveable
     {
         Surface[0, 0].Glyph = 'V';
         _speed = speed;
+        Surface[0, 0].Foreground = speed switch
+        {
+            1 => Color.Red,
+            2 or 3 => Color.Orange,
+            4 or 5 => Color.Yellow,
+            _ => Surface[0, 0].Foreground
+        };
     }
 
     public void Move()
