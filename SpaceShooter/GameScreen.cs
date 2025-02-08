@@ -18,6 +18,7 @@ public class GameScreen : ScreenObject
         private int _score;
         private int _health = 3;
         private Boolean _isGameOver = false;
+        private int _ammo = 10;
 
         public GameScreen()
         {
@@ -90,6 +91,7 @@ public class GameScreen : ScreenObject
         {
             _isGameOver = false;
             _health = 3;
+            _ammo = 10; //—брос патронов после проигрыша
             _score = 0;
             _bullets.Clear();
             _enemies.Clear();
