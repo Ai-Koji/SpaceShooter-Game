@@ -22,6 +22,7 @@ public class Supply : ScreenSurface, IMoveable
     private int _middleX;
     private int _direction;
     private int _ticks;
+    private int _lifetime = 50;
     public Supply(int direction) : base(1, 1)
     {
         _random = new Random();
@@ -37,8 +38,11 @@ public class Supply : ScreenSurface, IMoveable
             return;
         if (Position.X == _middleX)
         {
+            _lifetime--;
             return;
         }
         Position += new Point(_direction, 0);
     }
+
+    public bool IsExpired() => _lifetime <= 0;
 }

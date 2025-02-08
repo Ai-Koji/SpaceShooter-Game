@@ -197,6 +197,14 @@ public class GameScreen : ScreenObject
                 _ammo += 5;
                 break;
             }
+            foreach (var supply in _supplies.ToArray())
+            {
+                if (supply.IsExpired())
+                {
+                    _supplies.Remove(supply);
+                    _console.Children.Remove(supply);
+                }
+            }
         }
         private void TrySpawnEntity(int chancePercent, Func<(ScreenSurface entity, IList collection)> createEntity)
         {
