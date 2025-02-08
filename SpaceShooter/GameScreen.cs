@@ -94,6 +94,7 @@ public class GameScreen : ScreenObject
 
             CheckPlayerEnemyCollisions();
             CheckBulletEnemyCollisions();
+            CheckPlayerSupplyCollisions();
         }
         private void RestartGame()
         {
@@ -186,6 +187,16 @@ public class GameScreen : ScreenObject
                 };
                 return (ammo, _supplies);
             });
+        }
+        private void CheckPlayerSupplyCollisions()
+        {
+            foreach (var supply in _supplies.ToArray())
+            {
+                if (!_player.CheckCollision(supply)) continue;
+                RemoveEntity(supply, _supplies);
+                _ammo += 5;
+                break;
+            }
         }
         private void TrySpawnEntity(int chancePercent, Func<(ScreenSurface entity, IList collection)> createEntity)
         {
