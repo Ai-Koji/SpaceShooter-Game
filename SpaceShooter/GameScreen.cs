@@ -83,8 +83,8 @@ public class GameScreen : ScreenObject
             _console.Clear();
             _console.Print(1, 0, $"Score: {_score}");
             _console.Print(25, 0, $"Health: {_health}");
-            
-            _moveableEntities = _bullets.Cast<IMoveable>().Concat(_enemies).ToList();
+
+            _moveableEntities = _bullets.Cast <IMoveable>().Concat(_enemies).Concat(_supplies).ToList(); 
             _moveableEntities.ForEach(x => x.Move());
             
             SpawnRandomEntities();
@@ -173,8 +173,20 @@ public class GameScreen : ScreenObject
 
                 return (enemy, _enemies);
             });
+            
+            TrySpawnEntity(5, () =>
+            {
+                var direction = _random.Next(0, 2);
+                var position = direction == 0
+                ? new Point(-5, _random.Next(6, 12))
+                : new Point(45, _random.Next(6, 12));
+                var ammo = new Supply(position.X < 0 ? 1 : -1)
+                {
+                    Position = position
+                };
+                return (ammo, _supplies);
+            });
         }
-        
         private void TrySpawnEntity(int chancePercent, Func<(ScreenSurface entity, IList collection)> createEntity)
         {
             if (_random.Next(0, 1000) >= chancePercent) return;
