@@ -126,7 +126,10 @@ public class GameScreen : ScreenObject
         {
             TrySpawnEntity(50, () =>
             {
-                var enemy = new Enemy(){ Position = new Point(_random.Next(0, 40), 0) };
+                var enemy = new Enemy(_random.Next(1, 5))
+                {
+                    Position = new Point(_random.Next(0, 40), 0)
+                };
 
                 return (enemy, _enemies);
             });
