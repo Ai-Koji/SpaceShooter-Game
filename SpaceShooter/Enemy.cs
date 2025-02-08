@@ -14,6 +14,8 @@ public class Enemy : ScreenSurface, IMoveable
 
     public void Move()
     {
-        Position += new Point(0, 1);
+        _ticks++;
+        if (_ticks % _speed == 0)
+            Position += new Point(0, 1);
     }
 }
