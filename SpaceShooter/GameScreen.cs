@@ -82,6 +82,7 @@ public class GameScreen : ScreenObject
 
             _console.Clear();
             _console.Print(1, 0, $"Score: {_score}");
+            _console.Print(13, 0, $"Ammo: {_ammo}");
             _console.Print(25, 0, $"Health: {_health}");
 
             _moveableEntities = _bullets.Cast <IMoveable>().Concat(_enemies).Concat(_supplies).ToList(); 
