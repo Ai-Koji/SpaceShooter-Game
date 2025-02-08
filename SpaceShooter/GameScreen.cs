@@ -17,6 +17,7 @@ public class GameScreen : ScreenObject
         private Random _random;
         private int _score;
         private int _health = 3;
+        private Boolean _isGameOver = false;
 
         public GameScreen()
         {
@@ -59,6 +60,9 @@ public class GameScreen : ScreenObject
 
         private void OnFrameUpdate(object? sender, GameHost e)
         {
+            if (_isGameOver)
+                return;
+
             _console.Clear();
             _console.Print(1, 0, $"Score: {_score}");
             _console.Print(25, 0, $"Health: {_health}");
@@ -84,7 +88,13 @@ public class GameScreen : ScreenObject
                 RemoveEntity(enemy, _enemies);
                 
                 _health--;
-                
+                if (_health <= 0)
+                {
+                    _isGameOver = true;
+                    _console.Clear();
+                    _console.Print(15, 10, "GAME OVER", Color.Red, Color.Black);
+                    _console.Print(8, 12, "Press any key to restart", Color.Red, Color.Black);
+                }
                 break;
             }
         }
