@@ -58,13 +58,19 @@ public class GameScreen : ScreenObject
 
             if (info.IsKeyPressed(Keys.Space))
             {
-                var bullet = new Bullet { Position = _player.Position + new Point(0, -1) };
-
-                _bullets.Add(bullet);
-                _console.Children.Add(bullet);
+                if (_ammo > 0)
+                {
+                    var bullet = new Bullet
+                    {
+                        Position = _player.Position + new Point(0, -1)
+                    };
+                    _bullets.Add(bullet);
+                    _console.Children.Add(bullet);
+                    _ammo--;
+                }
             }
 
-            return base.ProcessKeyboard(info);
+        return base.ProcessKeyboard(info);
         }
 
         private void OnFrameUpdate(object? sender, GameHost e)
