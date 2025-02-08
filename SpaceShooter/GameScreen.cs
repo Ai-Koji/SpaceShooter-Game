@@ -13,6 +13,7 @@ public class GameScreen : ScreenObject
         private Player _player;
         private List<Bullet> _bullets;
         private List<Enemy> _enemies;
+        private List<Supply> _supplies;
         private List<IMoveable> _moveableEntities;
         private Random _random;
         private int _score;
@@ -30,7 +31,8 @@ public class GameScreen : ScreenObject
             _console.Children.Add(_player);
 
             _bullets = new List<Bullet>();
-            _enemies = new List<Enemy>();
+            _enemies = new List<Enemy>(); 
+            _supplies = new List<Supply>();
             _random = new Random();
             
             Game.Instance.FrameUpdate += OnFrameUpdate;
